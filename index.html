@@ -53,7 +53,7 @@
     .c-tl{top:1rem;left:1rem;} .c-tr{top:1rem;right:1rem;animation-direction:alternate-reverse;}
     .c-bl{bottom:1rem;left:1rem;animation-delay:1s;} .c-br{bottom:1rem;right:1rem;animation-delay:1s;animation-direction:alternate-reverse;}
 
-    /* ===================== GATE 1 — Original password ===================== */
+    /* ===================== GATE 1 ===================== */
     #gate1 {
       position:fixed; inset:0; z-index:9000;
       display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.8rem;
@@ -203,7 +203,7 @@
       100%{transform:translateY(-112vh) scale(var(--s1)) rotate(var(--r1)); opacity:0;}
     }
 
-    /* ===================== GATE 2 — 3-level hint password ===================== */
+    /* ===================== GATE 2 ===================== */
     #gate2 {
       position:fixed; inset:0; z-index:8000;
       display:none; flex-direction:column; align-items:center; justify-content:center; gap:1.2rem;
@@ -212,8 +212,6 @@
       padding:1rem; overflow-y:auto;
     }
     #gate2.on { display:flex; }
-
-    /* Reuse .gate-rose, .gate-title, .gate-btn, .gate-err */
 
     .gate2-box {
       background:rgba(255,255,255,0.045); border:1px solid rgba(201,168,76,0.3);
@@ -229,7 +227,6 @@
       color:var(--gold); opacity:0.9; text-transform:uppercase; text-align:center; line-height:1.7;
     }
 
-    /* Input + Hint side by side */
     .input-row { display:flex; align-items:center; gap:0.6rem; width:100%; }
 
     .gate2-input {
@@ -242,7 +239,6 @@
     .gate2-input:focus { border-color:var(--gold); box-shadow:0 0 22px rgba(201,168,76,0.25); }
     .gate2-input::placeholder { color:rgba(253,246,236,0.3); letter-spacing:0.06em; }
 
-    /* HINT button */
     .hint-btn {
       flex-shrink:0; padding:0.72rem 0.85rem;
       background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.45); border-radius:9px;
@@ -253,32 +249,21 @@
     .hint-btn:active { transform:translateY(0); }
     .hint-btn.hidden { display:none; }
 
-    /* Hint panel */
     .hint-panel {
       display:none; width:100%;
       background:rgba(139,26,42,0.2); border:1px solid rgba(201,168,76,0.22); border-radius:12px;
       padding:1rem 1.2rem; text-align:center;
     }
-    .hint-panel.visible {
-      display:block;
-      animation:hintFade 0.35s ease forwards;
-    }
+    .hint-panel.visible { display:block; animation:hintFade 0.35s ease forwards; }
     @keyframes hintFade { from{opacity:0;transform:translateY(-5px);} to{opacity:1;transform:translateY(0);} }
 
     .hint-level-tag {
       font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.22em;
       color:var(--gold); opacity:0.65; text-transform:uppercase; margin-bottom:0.5rem;
     }
-    .hint-text {
-      font-family:'Cormorant Garamond',serif; font-size:0.98rem; color:var(--cream);
-      line-height:1.75; letter-spacing:0.07em;
-    }
-    .hint-text .pattern {
-      font-family:'Cinzel',serif; font-size:0.8rem; color:var(--gold-light);
-      letter-spacing:0.17em; display:block; margin:0.12rem 0;
-    }
+    .hint-text { font-family:'Cormorant Garamond',serif; font-size:0.98rem; color:var(--cream); line-height:1.75; letter-spacing:0.07em; }
+    .hint-text .pattern { font-family:'Cinzel',serif; font-size:0.8rem; color:var(--gold-light); letter-spacing:0.17em; display:block; margin:0.12rem 0; }
 
-    /* Level 3 blinking numbers */
     .blink-numbers {
       font-family:'Cinzel',serif; font-size:2.2rem; letter-spacing:0.65em;
       color:var(--gold-light); text-shadow:0 0 20px rgba(201,168,76,0.75);
@@ -293,7 +278,6 @@
       line-height:1.55; letter-spacing:0.04em; display:block;
     }
 
-    /* More-help button inside panel */
     .more-hint-btn {
       margin-top:0.7rem; padding:0.45rem 1.2rem;
       background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.28); border-radius:8px;
@@ -304,15 +288,22 @@
     .more-hint-btn.hidden { display:none; }
 
     /* ===================== LOVE POPUP ===================== */
-    #lp { position:fixed; inset:0; z-index:9500; display:none; align-items:center; justify-content:center; padding:1.5rem; background:rgba(20,0,5,0.88); backdrop-filter:blur(12px); }
+    #lp {
+      position:fixed; inset:0; z-index:9500;
+      display:none; align-items:center; justify-content:center;
+      padding:1.5rem;
+      background:rgba(20,0,5,0.88); backdrop-filter:blur(12px);
+      overflow-y:auto;
+    }
     #lp.on { display:flex; }
     .pi {
       background:radial-gradient(ellipse at top, rgba(139,26,42,0.96) 0%, rgba(25,0,6,0.98) 100%);
       border:1px solid rgba(201,168,76,0.4); border-radius:22px;
       padding:clamp(2rem,6vw,4rem) clamp(1.5rem,5vw,3.5rem);
-      max-width:580px; width:100%; text-align:center;
+      max-width:560px; width:100%; text-align:center;
       box-shadow:0 0 0 1px rgba(201,168,76,0.1), 0 30px 100px rgba(0,0,0,0.8), inset 0 0 80px rgba(139,26,42,0.25);
       animation:popIn 0.75s cubic-bezier(0.34,1.56,0.64,1) forwards;
+      position:relative; /* so corner labels are relative to popup */
     }
     @keyframes popIn { from{transform:scale(0.55) translateY(30px);opacity:0;} to{transform:scale(1) translateY(0);opacity:1;} }
     .proses { font-size:clamp(1.6rem,4vw,2.4rem); margin-bottom:1.2rem; animation:rW 2.5s ease-in-out infinite; }
@@ -324,13 +315,177 @@
       text-shadow:0 0 30px rgba(201,168,76,0.5), 0 2px 8px rgba(0,0,0,0.7);
     }
     .pclose {
-      margin-top:2rem; padding:0.75rem 2.5rem;
+      margin-top:1.6rem; padding:0.75rem 2.5rem;
       background:linear-gradient(135deg,var(--gold),#9a2535);
       border:none; border-radius:50px; color:var(--maroon-deep);
       font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.2em; font-weight:600;
       cursor:pointer; transition:transform 0.2s, box-shadow 0.2s;
     }
     .pclose:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(201,168,76,0.45); }
+
+    /* ===================== WEDS CORNER LABELS ===================== */
+    /* Two small elegant labels pinned to screen corners — z above rose rain but don't cover popup content */
+    .weds-corner {
+      position:fixed;
+      z-index:9800;
+      pointer-events:none;
+      display:none;
+      flex-direction:column;
+      align-items:center;
+      gap:2px;
+    }
+    .weds-corner.on { display:flex; }
+
+    /* top-left */
+    #wedsCornerL { top:clamp(0.6rem,2vw,1.2rem); left:clamp(0.6rem,2vw,1.2rem); align-items:flex-start; }
+    /* top-right */
+    #wedsCornerR { top:clamp(0.6rem,2vw,1.2rem); right:clamp(0.6rem,2vw,1.2rem); align-items:flex-end; }
+
+    .weds-corner-text {
+      font-family:'Great Vibes',cursive;
+      font-size:clamp(0.75rem,2.2vw,1.15rem);
+      line-height:1.35;
+      letter-spacing:0.03em;
+      white-space:nowrap;
+    }
+    /* Left corner: line 1 = J weds S (red), line 2 = rose */
+    #wedsCornerL .wl1 {
+      color:#ff4466;
+      text-shadow:0 0 12px rgba(220,20,60,0.8);
+      animation:wcPulse 2.6s ease-in-out infinite;
+    }
+    /* Right corner: line 1 = S weds J (gold), line 2 = rose */
+    #wedsCornerR .wl1 {
+      color:var(--gold-light);
+      text-shadow:0 0 12px rgba(201,168,76,0.8);
+      animation:wcPulse 2.6s ease-in-out infinite 1.3s;
+    }
+    @keyframes wcPulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50%     { opacity:0.55; transform:scale(0.93); }
+    }
+    .weds-corner-rose {
+      font-size:clamp(0.7rem,1.8vw,1rem);
+      animation:wcRose 1.8s ease-in-out infinite alternate;
+    }
+    #wedsCornerL .weds-corner-rose { animation-direction:alternate; }
+    #wedsCornerR .weds-corner-rose { animation-direction:alternate-reverse; }
+    @keyframes wcRose { from{transform:rotate(-12deg) scale(0.9);} to{transform:rotate(12deg) scale(1.1);} }
+
+    /* ===================== FALLING RED ROSES ===================== */
+    #roseRain {
+      position:fixed; inset:0; z-index:9600;
+      pointer-events:none; overflow:hidden; display:none;
+    }
+    #roseRain.on { display:block; }
+    .rrose {
+      position:absolute; top:-80px;
+      animation:roseFall linear forwards;
+      user-select:none; will-change:transform,opacity;
+    }
+    @keyframes roseFall {
+      0%   { transform:translateY(0) rotate(0deg) scale(var(--rs)); opacity:0; }
+      5%   { opacity:1; }
+      90%  { opacity:0.9; }
+      100% { transform:translateY(110vh) rotate(var(--rr)) scale(var(--rs)); opacity:0; }
+    }
+
+    /* ===================== BLINKING HEART (inside popup) ===================== */
+    .blink-heart-wrap {
+      margin-top:1.4rem;
+      display:flex; flex-direction:column; align-items:center; gap:0.4rem;
+    }
+    .blink-heart {
+      font-size:2rem; cursor:pointer;
+      animation:heartBlink 0.9s step-start infinite;
+      filter:drop-shadow(0 0 10px rgba(220,20,60,0.8));
+      -webkit-tap-highlight-color:transparent;
+      transition:transform 0.15s;
+      display:inline-block;
+    }
+    .blink-heart:hover { transform:scale(1.18); }
+    .blink-heart:active { transform:scale(0.92); }
+    @keyframes heartBlink { 0%,49%{opacity:1;} 50%,100%{opacity:0;} }
+
+    .blink-heart-label {
+      font-family:'Cinzel',serif; font-size:0.56rem;
+      letter-spacing:0.22em; color:var(--gold); opacity:0.7;
+      text-transform:uppercase;
+    }
+
+    /* ===================== IMAGE REVEAL PANEL ===================== */
+    #imgReveal {
+      margin-top:1.2rem;
+      max-height:0; overflow:hidden;
+      transition:max-height 0.75s cubic-bezier(0.4,0,0.2,1), opacity 0.65s ease;
+      opacity:0; width:100%;
+    }
+    #imgReveal.open { max-height:440px; opacity:1; }
+
+    .img-frame {
+      border:2px solid rgba(201,168,76,0.55); border-radius:14px; overflow:hidden;
+      box-shadow:0 0 40px rgba(220,20,60,0.3), 0 0 80px rgba(201,168,76,0.12), inset 0 0 20px rgba(139,26,42,0.3);
+      position:relative;
+    }
+    .img-frame::before {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(to bottom, rgba(139,26,42,0.18) 0%, transparent 30%, transparent 70%, rgba(46,0,7,0.35) 100%);
+      z-index:1; pointer-events:none; border-radius:14px;
+    }
+    .img-frame img {
+      width:100%; display:block; border-radius:12px;
+      object-fit:cover; max-height:340px;
+      animation:imgFadeIn 0.6s ease 0.2s both;
+    }
+    @keyframes imgFadeIn { from{opacity:0;transform:scale(0.97);} to{opacity:1;transform:scale(1);} }
+
+    /* upload placeholder shown when no image loaded */
+    .img-upload-placeholder {
+      width:100%; padding:2rem 1rem;
+      display:flex; flex-direction:column; align-items:center; gap:0.9rem;
+      cursor:pointer;
+    }
+    .img-upload-placeholder .up-icon { font-size:2.4rem; animation:hFloat 2s ease-in-out infinite; }
+    .img-upload-placeholder .up-text {
+      font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:0.2em;
+      color:var(--gold); opacity:0.75; text-transform:uppercase; text-align:center; line-height:1.7;
+    }
+    .img-upload-placeholder .up-btn {
+      padding:0.6rem 1.6rem;
+      background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.4); border-radius:8px;
+      color:var(--gold-light); font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:0.18em;
+      cursor:pointer; transition:background 0.2s;
+    }
+    .img-upload-placeholder .up-btn:hover { background:rgba(201,168,76,0.28); }
+
+    .img-caption {
+      font-family:'Great Vibes',cursive;
+      font-size:clamp(1rem,3vw,1.35rem);
+      color:var(--gold-light); text-align:center;
+      margin-top:0.6rem; letter-spacing:0.04em;
+      text-shadow:0 0 20px rgba(201,168,76,0.5);
+    }
+
+    /* ===================== MUSIC CONTROL ===================== */
+    #musicCtrl {
+      position:fixed; bottom:1.2rem; right:1.2rem;
+      z-index:9900; display:none;
+      background:rgba(46,0,7,0.72); border:1px solid rgba(201,168,76,0.35); border-radius:50px;
+      padding:0.45rem 0.9rem; gap:0.5rem; align-items:center;
+      backdrop-filter:blur(10px);
+      cursor:pointer;
+      font-family:'Cinzel',serif; font-size:0.54rem; letter-spacing:0.16em;
+      color:var(--gold); text-transform:uppercase;
+      transition:background 0.2s, transform 0.2s;
+      -webkit-tap-highlight-color:transparent;
+      box-shadow:0 4px 20px rgba(0,0,0,0.4);
+    }
+    #musicCtrl.on { display:flex; }
+    #musicCtrl:hover { background:rgba(107,15,26,0.9); transform:translateY(-2px); }
+    #musicCtrl:active { transform:scale(0.96); }
+    #musicNote { font-size:1.1rem; animation:noteFloat 1.8s ease-in-out infinite; display:inline-block; }
+    @keyframes noteFloat { 0%,100%{transform:translateY(0) rotate(-5deg);} 50%{transform:translateY(-4px) rotate(5deg);} }
+    #musicCtrl.muted #musicNote { animation:none; opacity:0.45; }
   </style>
 </head>
 <body>
@@ -346,7 +501,7 @@
   <div class="cdeco c-bl">🌸</div>
   <div class="cdeco c-br">🌹</div>
 
-  <!-- ============ GATE 1 — Original entry password ============ -->
+  <!-- ============ GATE 1 ============ -->
   <div id="gate1">
     <div class="gate-rose">🌹</div>
     <div class="gate-title">Shagufta & Junaid</div>
@@ -362,7 +517,6 @@
   <div id="stage">
     <div class="wordmark">Shagufta & Junaid</div>
     <div class="tagline">Two hearts · One soul · Forever</div>
-
     <div class="anim-stage" id="anim-stage">
       <div class="char char-s" id="char-s">
         <div class="held-heart">💗</div>
@@ -376,11 +530,9 @@
         <div class="legs"><div class="leg"></div><div class="leg"></div></div>
       </div>
     </div>
-
     <div class="ornament">
       <div class="oLine"></div><span>🌹</span><div class="oLine"></div>
     </div>
-
     <button class="heart-btn" id="heartBtn" onclick="triggerLove()" aria-label="Tap to share love">
       <span class="heart-icon">❤️</span>
       <span class="heart-label">Tap to share love</span>
@@ -390,35 +542,29 @@
   <!-- Flying hearts overlay -->
   <div id="ho"></div>
 
-  <!-- ============ GATE 2 — 3-level hint password (appears after celebration) ============ -->
+  <!-- ============ GATE 2 ============ -->
   <div id="gate2">
     <div class="gate-rose">💗</div>
     <div class="gate-title">One More Secret…</div>
-
     <div class="gate2-box">
       <div class="gate2-label">
         Guess the Password!<br>Ask from your heart: What is the Password?
       </div>
-
-      <!-- Input + HINT button -->
       <div class="input-row">
         <input id="pwd2" class="gate2-input" type="text" placeholder="••••••••" autocomplete="off" spellcheck="false"/>
         <button class="hint-btn" id="hintBtn" onclick="showHint()">HINT</button>
       </div>
-
-      <!-- Hint Panel -->
       <div class="hint-panel" id="hintPanel">
         <div class="hint-level-tag" id="hintLevelTag"></div>
         <div class="hint-text" id="hintText"></div>
         <button class="more-hint-btn hidden" id="moreHintBtn" onclick="showHint()"></button>
       </div>
-
       <button class="gate-btn" onclick="unlock2()">OPEN WITH LOVE ❤️</button>
       <div class="gate-err" id="gate2-err"></div>
     </div>
   </div>
 
-  <!-- ============ LOVE POPUP (shown after Gate 2 correct) ============ -->
+  <!-- ============ LOVE POPUP ============ -->
   <div id="lp">
     <div class="pi">
       <div class="proses">🌹 ❤️ 🌹</div>
@@ -429,14 +575,57 @@
         and Together in Jannah, InshaAllah.<br>
         We Are One, Always and Forever. 💕
       </div>
+
+      <!-- Blinking Heart -->
+      <div class="blink-heart-wrap">
+        <span class="blink-heart" id="blinkHeart" onclick="revealImage()" title="Tap to reveal something special">❤️</span>
+        <span class="blink-heart-label">Tap the heart</span>
+      </div>
+
+      <!-- Image Reveal Panel -->
+      <div id="imgReveal">
+        <div class="img-frame" id="imgFrame">
+          <!-- Upload placeholder shown by default; replaced by img after upload -->
+          <div class="img-upload-placeholder" id="uploadPlaceholder" onclick="document.getElementById('imgFileInput').click()">
+            <span class="up-icon">📷</span>
+            <span class="up-text">Tap to choose a photo<br>from your device</span>
+            <span class="up-btn">Choose Photo</span>
+          </div>
+          <!-- Hidden file input -->
+          <input type="file" id="imgFileInput" accept="image/*" style="display:none" onchange="handleImageUpload(event)"/>
+          <!-- Actual image; hidden until uploaded -->
+          <img id="revealImg" src="" alt="A special memory for Shagufta & Junaid" style="display:none"/>
+        </div>
+        <div class="img-caption">Forever & Always 💕</div>
+      </div>
+
       <button class="pclose" onclick="closePopup()">Close with love ❤️</button>
     </div>
   </div>
 
+  <!-- Falling roses overlay -->
+  <div id="roseRain"></div>
+
+  <!-- Weds corner labels (shown only on correct password) -->
+  <div class="weds-corner" id="wedsCornerL">
+    <span class="weds-corner-text wl1">Junaid Weds Shagufta</span>
+    <span class="weds-corner-rose">🌹</span>
+  </div>
+  <div class="weds-corner" id="wedsCornerR">
+    <span class="weds-corner-text wl1">Shagufta Weds Junaid</span>
+    <span class="weds-corner-rose">🌹</span>
+  </div>
+
+  <!-- Music toggle button -->
+  <div id="musicCtrl" onclick="toggleMusic()">
+    <span id="musicNote">🎵</span>
+    <span id="musicLabel">Music</span>
+  </div>
+
   <script>
     /* ===== PASSWORDS ===== */
-    const PW1 = "shagufta2024";                 // Gate 1 — original (case-sensitive as original)
-    const PW2 = "SHAGUFTA LOVE JUNAID";         // Gate 2 — canonical uppercase
+    const PW1 = "shagufta2024";
+    const PW2 = "SHAGUFTA LOVE JUNAID";
 
     /* ===== GATE 1 ===== */
     document.getElementById('pwd1').addEventListener('keydown', e => { if(e.key==='Enter') unlock1(); });
@@ -499,17 +688,14 @@
       }
     }
 
-    /* ===== HEART BUTTON — triggers celebration then Gate 2 ===== */
+    /* ===== HEART BUTTON ===== */
     let loveActive = false;
 
     function triggerLove() {
       if (loveActive) return;
       loveActive = true;
-
-      // Disable button so it can't be tapped again
       document.getElementById('heartBtn').style.pointerEvents = 'none';
 
-      // Launch flying hearts
       const o = document.getElementById('ho');
       o.innerHTML = ''; o.classList.add('on');
       const syms = ['❤️','💕','💗','💓','💘','💝','🌹','✨','💖','💞','🩷','🌸'];
@@ -529,20 +715,16 @@
         o.appendChild(h);
       }
 
-      // After celebration ends → show Gate 2
       setTimeout(() => {
         o.classList.remove('on');
         o.innerHTML = '';
         document.getElementById('gate2').classList.add('on');
-        setTimeout(() => {
-          document.getElementById('pwd2').focus();
-        }, 400);
+        setTimeout(() => { document.getElementById('pwd2').focus(); }, 400);
       }, 3400);
     }
 
-    /* ===== GATE 2 — 3-level hint system ===== */
+    /* ===== GATE 2 ===== */
     let hintLevel = 0;
-
     document.getElementById('pwd2').addEventListener('keydown', e => { if(e.key==='Enter') unlock2(); });
 
     function showHint() {
@@ -555,21 +737,17 @@
       const moreBtn  = document.getElementById('moreHintBtn');
       const hintBtn  = document.getElementById('hintBtn');
 
-      // Re-animate panel
       panel.classList.remove('visible');
       void panel.offsetWidth;
       panel.classList.add('visible');
 
       if (hintLevel === 1) {
-        /* ---- Level 1: Full structure pattern ---- */
         levelTag.textContent = 'Hint — Level 1';
         textEl.innerHTML = '<span class="pattern">XYZXYZXY XYZX XYZXYZ</span>';
         hintBtn.classList.add('hidden');
         moreBtn.classList.remove('hidden');
         moreBtn.textContent = 'Need More Help?';
-
       } else if (hintLevel === 2) {
-        /* ---- Level 2: "Guess Shagufta" only; rest as patterns ---- */
         levelTag.textContent = 'Hint — Level 2';
         textEl.innerHTML =
           'Guess Shagufta: <span class="pattern">XYZXYZXY</span>' +
@@ -577,9 +755,7 @@
           '<span class="pattern">XYZAIX</span>';
         moreBtn.classList.remove('hidden');
         moreBtn.textContent = 'Final Hint?';
-
       } else if (hintLevel === 3) {
-        /* ---- Level 3: Blinking numbers ---- */
         levelTag.textContent = 'Hint — Level 3 (Final)';
         textEl.innerHTML =
           '<span class="blink-numbers">8 &nbsp; 4 &nbsp; 6</span>' +
@@ -593,9 +769,12 @@
       const err = document.getElementById('gate2-err');
 
       if (val === PW2) {
-        // Correct — hide Gate 2, show love popup
         document.getElementById('gate2').classList.remove('on');
         document.getElementById('lp').classList.add('on');
+        startRoseRain();
+        showWedsCorners();
+        startMusic();
+        document.getElementById('musicCtrl').classList.add('on');
       } else {
         err.textContent = 'Incorrect password. Try again, my love. 💔';
         document.getElementById('pwd2').value = '';
@@ -604,10 +783,226 @@
       }
     }
 
+    /* ===== FALLING RED ROSES ===== */
+    let roseRainInterval = null;
+
+    function startRoseRain() {
+      const container = document.getElementById('roseRain');
+      container.innerHTML = '';
+      container.classList.add('on');
+      const roseEmojis = ['🌹','🌹','🌹','🥀','💐','🌸','❤️','💕'];
+
+      function spawnRose() {
+        const el = document.createElement('div');
+        el.className = 'rrose';
+        el.textContent = roseEmojis[Math.floor(Math.random() * roseEmojis.length)];
+        const size = 1.1 + Math.random() * 1.8;
+        const duration = 3.5 + Math.random() * 4;
+        el.style.left = (Math.random() * 105 - 2) + '%';
+        el.style.fontSize = size + 'rem';
+        el.style.animationDuration = duration + 's';
+        el.style.animationDelay = '0s';
+        el.style.setProperty('--rs', size * 0.55);
+        el.style.setProperty('--rr', (Math.random() * 720 - 360) + 'deg');
+        container.appendChild(el);
+        setTimeout(() => { if (el.parentNode) el.parentNode.removeChild(el); }, (duration + 0.3) * 1000);
+      }
+
+      for (let i = 0; i < 22; i++) setTimeout(spawnRose, Math.random() * 800);
+      roseRainInterval = setInterval(spawnRose, 220);
+    }
+
+    function stopRoseRain() {
+      if (roseRainInterval) { clearInterval(roseRainInterval); roseRainInterval = null; }
+      const c = document.getElementById('roseRain');
+      c.classList.remove('on');
+      setTimeout(() => { c.innerHTML = ''; }, 400);
+    }
+
+    /* ===== WEDS CORNERS ===== */
+    function showWedsCorners() {
+      document.getElementById('wedsCornerL').classList.add('on');
+      document.getElementById('wedsCornerR').classList.add('on');
+    }
+    function hideWedsCorners() {
+      document.getElementById('wedsCornerL').classList.remove('on');
+      document.getElementById('wedsCornerR').classList.remove('on');
+    }
+
+    /* ===== IMAGE REVEAL ===== */
+    let imageRevealed = false;
+
+    function revealImage() {
+      if (imageRevealed) return;
+      imageRevealed = true;
+      const panel = document.getElementById('imgReveal');
+      panel.classList.add('open');
+      setTimeout(() => { panel.scrollIntoView({ behavior:'smooth', block:'nearest' }); }, 200);
+    }
+
+    function handleImageUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = document.getElementById('revealImg');
+        img.src = e.target.result;
+        img.style.display = 'block';
+        document.getElementById('uploadPlaceholder').style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    /* ===== BACKGROUND ROMANTIC MUSIC (Web Audio API) ===== */
+    let audioCtx = null;
+    let musicMuted = false;
+    let musicNodes = [];
+    let musicStarted = false;
+
+    // Romantic chord progression: Am - F - C - G (loop)
+    // Each chord plays arpeggiated soft piano-like tones
+    const CHORDS = [
+      [220.00, 261.63, 329.63, 440.00],  // Am
+      [174.61, 220.00, 261.63, 349.23],  // F
+      [130.81, 164.81, 196.00, 261.63],  // C
+      [196.00, 246.94, 293.66, 392.00],  // G
+    ];
+
+    function createSoftTone(ctx, freq, startTime, duration, volume) {
+      const osc   = ctx.createOscillator();
+      const gain  = ctx.createGain();
+      const filt  = ctx.createBiquadFilter();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, startTime);
+
+      // Add subtle harmonic with triangle wave
+      const osc2 = ctx.createOscillator();
+      const gain2 = ctx.createGain();
+      osc2.type = 'triangle';
+      osc2.frequency.setValueAtTime(freq * 2, startTime);
+      gain2.gain.setValueAtTime(volume * 0.08, startTime);
+
+      filt.type = 'lowpass';
+      filt.frequency.setValueAtTime(1200, startTime);
+
+      // Soft piano-like envelope: quick attack, long sustain, gentle release
+      gain.gain.setValueAtTime(0, startTime);
+      gain.gain.linearRampToValueAtTime(volume, startTime + 0.06);
+      gain.gain.setValueAtTime(volume * 0.75, startTime + 0.4);
+      gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+      osc.connect(filt);
+      filt.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc2.connect(gain2);
+      gain2.connect(ctx.destination);
+
+      osc.start(startTime);
+      osc.stop(startTime + duration);
+      osc2.start(startTime);
+      osc2.stop(startTime + duration);
+
+      musicNodes.push(osc, osc2, gain, gain2, filt);
+    }
+
+    function scheduleChord(ctx, chordNotes, startTime) {
+      chordNotes.forEach((freq, i) => {
+        // Arpeggiated: each note offset slightly
+        const noteStart = startTime + i * 0.12;
+        createSoftTone(ctx, freq, noteStart, 2.8, 0.055);
+        // Also add bass octave below
+        if (i === 0) createSoftTone(ctx, freq / 2, noteStart, 3.2, 0.06);
+      });
+    }
+
+    let scheduleLoop = null;
+    let chordIndex = 0;
+    let nextChordTime = 0;
+
+    function scheduleAhead() {
+      if (!audioCtx || musicMuted) return;
+      const CHORD_DURATION = 3.0;
+      const LOOKAHEAD = 0.3;
+
+      while (nextChordTime < audioCtx.currentTime + LOOKAHEAD + CHORD_DURATION * 2) {
+        scheduleChord(audioCtx, CHORDS[chordIndex % CHORDS.length], nextChordTime);
+        chordIndex++;
+        nextChordTime += CHORD_DURATION;
+      }
+    }
+
+    function startMusic() {
+      if (musicStarted) return;
+      musicStarted = true;
+      try {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        nextChordTime = audioCtx.currentTime + 0.1;
+        chordIndex = 0;
+        scheduleAhead();
+        scheduleLoop = setInterval(scheduleAhead, 1200);
+      } catch(e) {
+        console.warn('Web Audio not supported:', e);
+      }
+    }
+
+    function stopMusic() {
+      if (scheduleLoop) { clearInterval(scheduleLoop); scheduleLoop = null; }
+      if (audioCtx) {
+        try { audioCtx.close(); } catch(e){}
+        audioCtx = null;
+      }
+      musicStarted = false;
+      musicNodes = [];
+    }
+
+    function toggleMusic() {
+      musicMuted = !musicMuted;
+      const ctrl  = document.getElementById('musicCtrl');
+      const note  = document.getElementById('musicNote');
+      const label = document.getElementById('musicLabel');
+
+      if (musicMuted) {
+        ctrl.classList.add('muted');
+        note.textContent  = '🔇';
+        label.textContent = 'Muted';
+        // Fade out: close context
+        if (audioCtx) { try{ audioCtx.suspend(); }catch(e){} }
+      } else {
+        ctrl.classList.remove('muted');
+        note.textContent  = '🎵';
+        label.textContent = 'Music';
+        if (audioCtx) {
+          try {
+            audioCtx.resume();
+            scheduleAhead();
+          } catch(e) {}
+        } else {
+          startMusic();
+        }
+      }
+    }
+
     /* ===== LOVE POPUP CLOSE ===== */
     function closePopup() {
       document.getElementById('lp').classList.remove('on');
-      // Re-enable heart button in case they want to replay
+      stopRoseRain();
+      hideWedsCorners();
+      stopMusic();
+      musicMuted = false;
+      document.getElementById('musicCtrl').classList.remove('on','muted');
+      document.getElementById('musicNote').textContent  = '🎵';
+      document.getElementById('musicLabel').textContent = 'Music';
+
+      // Reset image reveal
+      imageRevealed = false;
+      document.getElementById('imgReveal').classList.remove('open');
+      document.getElementById('revealImg').src = '';
+      document.getElementById('revealImg').style.display = 'none';
+      document.getElementById('uploadPlaceholder').style.display = 'flex';
+      document.getElementById('imgFileInput').value = '';
+
       loveActive = false;
       document.getElementById('heartBtn').style.pointerEvents = '';
     }
